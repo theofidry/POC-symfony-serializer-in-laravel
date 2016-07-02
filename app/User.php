@@ -4,6 +4,14 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @property int                id
+ * @property string             name
+ * @property string             email
+ * @property \DateTimeInterface created_at
+ * @property string             password
+ * @property string             remember_token
+ */
 class User extends Authenticatable
 {
     /**
@@ -12,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'id', 'name', 'email', 'password', 'created_at',
     ];
 
     /**
@@ -23,4 +31,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public $timestamps = false;
+    
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
 }
